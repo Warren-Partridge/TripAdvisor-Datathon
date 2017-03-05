@@ -5,7 +5,7 @@ function Y = loadForNNData(sessions)
     checkInLogical = ~strcmp(sessions{:,9}, 'NA');
     checkInIntInput = sessions{:,9};
     checkInIntOutput = zeros(height(sessions), 1);
-
+    datesVector = getDayOfWeek(sessions); % this takes 83 minutes and returns vector of ints
     
     Y = zeros(height(sessions), length(asIsIndexes) + length(namesTraffic) + length(namesOS) + 2);
     Y(:,1:length(asIsIndexes)) = sessions{:,asIsIndexes};
@@ -33,7 +33,7 @@ function Y = loadForNNData(sessions)
     end
     
     %disp(sum(checkInIntOutput)/sum(checkInLogical));
-    disp(mean(checkInIntOutput(checkInLogical))); % This is the mean of checkInIntOutput without the 0s
+    %disp(mean(checkInIntOutput(checkInLogical))); % This is the mean of checkInIntOutput without the 0s
 
     checkInIntOutput(~checkInLogical) = mean(checkInIntOutput(checkInLogical));
     
@@ -42,4 +42,7 @@ function Y = loadForNNData(sessions)
     M = M + 1;
     Y(:,(M + 1)) = checkInIntOutput;
     
+    M = M + 1;
+    Y(:,(M + 1)) = datesVector;
+    csvwrite('excellent_data.csv', Y);
 end

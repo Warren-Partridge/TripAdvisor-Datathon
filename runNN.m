@@ -1,8 +1,9 @@
 dataInput = loadForNNData(sessions)';
 booked = double(sessions{:,17}');
 
-nnet = patternnet([500 40 500], 'trainrp');
-% 500 40 500 makes it guess all 1 (and fail) :(
+nnet = patternnet([20], 'trainrp');
+% 500 40 500 @ 90/5/5 makes it guess all 1 (and fail) :(
+
 
 
 nnet.divideParam.trainRatio = 80/100;
