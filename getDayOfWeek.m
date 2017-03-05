@@ -11,4 +11,3 @@ for days = 1:length(sessions{:,2})
     % a half
 end
 dayOfWeek = dayValues;
-    
